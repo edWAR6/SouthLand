@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';
 
 /**
  * Generated class for the VideosPage page.
@@ -14,8 +15,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'videos.html',
 })
 export class VideosPage {
+  videoUrl: SafeResourceUrl;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private domSanitizer: DomSanitizer, public navCtrl: NavController, public navParams: NavParams) {
+    this.videoUrl = this.domSanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/aw5pMBeOWM0');
   }
 
   ionViewDidLoad() {
