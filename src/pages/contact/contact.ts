@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, Platform } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import {
-  Geocoder,
   GoogleMaps,
   GoogleMap,
   GoogleMapOptions,
@@ -9,8 +8,7 @@ import {
   LatLng,
   CameraPosition,
   MarkerOptions,
-  Marker,
-  GoogleMapsMapTypeId
+  Marker
 } from '@ionic-native/google-maps'
 
 @Component({
@@ -23,35 +21,56 @@ export class ContactPage {
   map: GoogleMap;
   location: LatLng;
 
-  constructor(public navCtrl: NavController, public platform: Platform, private googleMaps: GoogleMaps) {
-    this.location = new LatLng(-34.9290,138.6010);
-    platform.ready().then(() => {
-      this.loadMap();
-    });
+  constructor(public navCtrl: NavController, private googleMaps: GoogleMaps) {
+    this.location = new LatLng(-34.9290,138.6010);      
+  }
+
+  ionViewDidLoad(){
+    this.loadMap();
   }
 
   ionViewWillEnter(): void {
     document.getElementsByClassName('nav-decor')[0].className += ' hide';
-    // document.querySelector('.transport-page').setAttribute("hidden", "");
   }
 
   ionViewWillLeave(): void {
     document.getElementsByClassName('nav-decor')[0].className = 'nav-decor';
-    // document.querySelector('.transport-page').removeAttribute("hidden");
   }
 
   loadMap(){
     this.element = document.getElementById('map');
-    this.map = this.googleMaps.create(this.element);
+    let mapOptions: GoogleMapOptions = {
+      camera: {
+        target: {
+          lat: this.location.lat,
+          lng: this.location.lng
+        },
+        zoom: 18,
+        tilt: 30
+      }
+    };
+    this.map = this.googleMaps.create(this.element, mapOptions);
 
-    this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
-      // let position: CameraPosition = {
-      //   target: this.location,
-      //   zoom: 12,
-      //   tilt: 30
-      // };
-      // this.map.moveCamera(position);
+    this.map.one(GoogleMapsEvent.MAP_READY).then(() => {
+      console.log('Map is ready!');
+      this.map.addMarker({
+        title: 'South Land',
+        icon: 'blue',
+        animation: 'DROP',
+        position: {
+          lat: this.location.lat,
+          lng: this.location.lng
+        }
+      });
     });
+    // this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
+    //   // let position: CameraPosition = {
+    //   //   target: this.location,
+    //   //   zoom: 12,
+    //   //   tilt: 30
+    //   // };
+    //   // this.map.moveCamera(position);
+    // });
   }
 
 }
