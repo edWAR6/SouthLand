@@ -1,6 +1,11 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>Inicio</ion-title>
+    <ion-buttons end>
+      <button ion-button color="light-text" clear icon-only (click)="openModal()">
+        <ion-icon name='information-circle'></ion-icon>
+      </button>
+    </ion-buttons>    
   </ion-navbar>
 </ion-header>
 
@@ -14,6 +19,6 @@
     <ion-icon name="star" color="star"></ion-icon>
   </p>
   <p>
-    Puede canjear los cupones en nuetro negocio, mostrando el código único de la promoción.
+    Puede canjear los cupones en nuestro negocio, mostrando el código único de la promoción.
   </p>
 </ion-content>

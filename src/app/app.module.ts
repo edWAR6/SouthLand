@@ -6,6 +6,7 @@ import { MyApp } from './app.component';
 import { GoogleMaps } from '@ionic-native/google-maps'
 
 import { HomePage } from '../pages/home/home';
+import { AboutPage } from '../pages/about/about';
 import { PromotionsPage } from '../pages/promotions/promotions';
 import { PhotosPage } from '../pages/photos/photos';
 import { VideosPage } from '../pages/videos/videos';
@@ -19,6 +20,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   declarations: [
     MyApp,
     HomePage,
+    AboutPage,
     PromotionsPage,
     PhotosPage,
     VideosPage,
@@ -33,6 +35,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   entryComponents: [
     MyApp,
     HomePage,
+    AboutPage,
     PromotionsPage,
     PhotosPage,
     VideosPage,
